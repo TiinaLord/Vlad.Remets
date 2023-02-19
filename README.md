@@ -1,4 +1,5 @@
 ## I'm a QA Engineer with 1.5 years experience in mobile(gamedev)
+I constantly developing skills, adopting the experience of colleagues. Ready to make every effort for the final quality of the product
 ## My CV
 [Link to my CV](https://career.habr.com/vladislavremets)
 
