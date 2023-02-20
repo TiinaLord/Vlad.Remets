@@ -1,0 +1,1135 @@
+{
+	"info": {
+		"_postman_id": "9c4462c1-4323-4efd-a745-dc866c89603d",
+		"name": "DummyAPI.IO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17092848"
+	},
+	"item": [
+		{
+			"name": "User Data",
+			"item": [
+				{
+					"name": "get list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"console.log(\"Get sent\")"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"Send GET\")"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get list (without authorization)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "paging",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 300ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user?page=1&limit=50",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "correct limits",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/user?page=1&limit=50",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "50"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "7521"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"1d61-ss9DSU2SoulrJkyYC8Y4akwf7rA\""
+								},
+								{
+									"key": "Server",
+									"value": "Google Frontend"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31556926"
+								},
+								{
+									"key": "X-Cloud-Trace-Context",
+									"value": "3bacfc527efe82c6dc6bf03e1da7817f"
+								},
+								{
+									"key": "X-Country-Code",
+									"value": "RU"
+								},
+								{
+									"key": "Accept-Ranges",
+									"value": "bytes"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 12 Feb 2023 14:16:22 GMT"
+								},
+								{
+									"key": "X-Served-By",
+									"value": "cache-fra-eddf8230048-FRA"
+								},
+								{
+									"key": "X-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Cache-Hits",
+									"value": "0"
+								},
+								{
+									"key": "X-Timer",
+									"value": "S1676211383.549805,VS0,VE221"
+								},
+								{
+									"key": "Vary",
+									"value": "cookie,need-authorization, x-fh-requested-host, accept-encoding"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\";ma=86400,h3-29=\":443\";ma=86400,h3-27=\":443\";ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": \"60d0fe4f5311236168a109fd\",\n            \"title\": \"mr\",\n            \"firstName\": \"Dylan\",\n            \"lastName\": \"Vasquez\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/66.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a109fe\",\n            \"title\": \"mr\",\n            \"firstName\": \"AndrÃ©\",\n            \"lastName\": \"Robert\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/9.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a109ff\",\n            \"title\": \"mrs\",\n            \"firstName\": \"Josefina\",\n            \"lastName\": \"Calvo\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/women/3.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a00\",\n            \"title\": \"mrs\",\n            \"firstName\": \"Els\",\n            \"lastName\": \"Ijsseldijk\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/women/75.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a01\",\n            \"title\": \"mr\",\n            \"firstName\": \"Jesus\",\n            \"lastName\": \"Riley\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/45.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a02\",\n            \"title\": \"mr\",\n            \"firstName\": \"Cristobal\",\n            \"lastName\": \"Soler\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/31.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a03\",\n            \"title\": \"mr\",\n            \"firstName\": \"Andri\",\n            \"lastName\": \"Leclerc\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/57.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a04\",\n            \"title\": \"mr\",\n            \"firstName\": \"Konsta\",\n            \"lastName\": \"Manninen\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/24.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a05\",\n            \"title\": \"ms\",\n            \"firstName\": \"Ane\",\n            \"lastName\": \"Frafjord\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/women/54.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a06\",\n            \"title\": \"mrs\",\n            \"firstName\": \"OlaÃ\\u00ad\",\n            \"lastName\": \"Gomes\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/women/85.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a07\",\n            \"title\": \"mr\",\n            \"firstName\": \"Sigmund\",\n            \"lastName\": \"Myran\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/61.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a08\",\n            \"title\": \"ms\",\n            \"firstName\": \"Lilja\",\n            \"lastName\": \"Lampinen\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/women/50.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a09\",\n            \"title\": \"miss\",\n            \"firstName\": \"Clea\",\n            \"lastName\": \"Dubois\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/women/11.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a0a\",\n            \"title\": \"mr\",\n            \"firstName\": \"Sandro\",\n            \"lastName\": \"Guillot\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/8.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a0b\",\n            \"title\": \"miss\",\n            \"firstName\": \"Margarita\",\n            \"lastName\": \"Vicente\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/women/5.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a0c\",\n            \"title\": \"ms\",\n            \"firstName\": \"Annabel\",\n            \"lastName\": \"Somby\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/women/35.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a0d\",\n            \"title\": \"mr\",\n            \"firstName\": \"Lyam\",\n            \"lastName\": \"Morin\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/95.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a0e\",\n            \"title\": \"mr\",\n            \"firstName\": \"Mads\",\n            \"lastName\": \"Andersen\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/74.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a0f\",\n            \"title\": \"mr\",\n            \"firstName\": \"Kaya\",\n            \"lastName\": \"Basoglu\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/59.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a10\",\n            \"title\": \"mr\",\n            \"firstName\": \"Nenad\",\n            \"lastName\": \"Leroy\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/62.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a11\",\n            \"title\": \"miss\",\n            \"firstName\": \"Angeles\",\n            \"lastName\": \"Gimenez\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/women/56.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a12\",\n            \"title\": \"mr\",\n            \"firstName\": \"Kenneth\",\n            \"lastName\": \"Carter\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/40.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a13\",\n            \"title\": \"mr\",\n            \"firstName\": \"Jan\",\n            \"lastName\": \"Siebert\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/60.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a14\",\n            \"title\": \"mr\",\n            \"firstName\": \"Cameron\",\n            \"lastName\": \"Mendoza\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/95.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a15\",\n            \"title\": \"mr\",\n            \"firstName\": \"Benjamin\",\n            \"lastName\": \"Wilson\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/14.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a16\",\n            \"title\": \"mr\",\n            \"firstName\": \"Sergio\",\n            \"lastName\": \"Ferrer\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/29.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a17\",\n            \"title\": \"mrs\",\n            \"firstName\": \"Emma\",\n            \"lastName\": \"Jokela\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/women/46.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a18\",\n            \"title\": \"mr\",\n            \"firstName\": \"Jeremy\",\n            \"lastName\": \"Morin\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/60.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a19\",\n            \"title\": \"miss\",\n            \"firstName\": \"Debbie\",\n            \"lastName\": \"Garcia\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/women/86.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a1a\",\n            \"title\": \"mr\",\n            \"firstName\": \"Vaino\",\n            \"lastName\": \"Sakala\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/56.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a1b\",\n            \"title\": \"mr\",\n            \"firstName\": \"Siem\",\n            \"lastName\": \"Marcelissen\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/38.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a1c\",\n            \"title\": \"miss\",\n            \"firstName\": \"Abigail\",\n            \"lastName\": \"Liu\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/women/83.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a1d\",\n            \"title\": \"mr\",\n            \"firstName\": \"Eckard\",\n            \"lastName\": \"Degner\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/41.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a1e\",\n            \"title\": \"mr\",\n            \"firstName\": \"Niklas\",\n            \"lastName\": \"Baltzersen\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/2.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a1f\",\n            \"title\": \"mr\",\n            \"firstName\": \"David\",\n            \"lastName\": \"Ramos\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/30.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a20\",\n            \"title\": \"mr\",\n            \"firstName\": \"Mem\",\n            \"lastName\": \"Rocha\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/59.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a21\",\n            \"title\": \"miss\",\n            \"firstName\": \"Constance\",\n            \"lastName\": \"Bourgeois\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/women/87.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a22\",\n            \"title\": \"mr\",\n            \"firstName\": \"Nikolaj\",\n            \"lastName\": \"Larsen\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/22.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a23\",\n            \"title\": \"miss\",\n            \"firstName\": \"Oya\",\n            \"lastName\": \"Cetiner\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/women/66.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a24\",\n            \"title\": \"miss\",\n            \"firstName\": \"Katie\",\n            \"lastName\": \"Hughes\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/women/74.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a25\",\n            \"title\": \"ms\",\n            \"firstName\": \"Kitty\",\n            \"lastName\": \"Steward\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/women/78.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a26\",\n            \"title\": \"mr\",\n            \"firstName\": \"Elliot\",\n            \"lastName\": \"Walker\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/53.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a27\",\n            \"title\": \"mr\",\n            \"firstName\": \"Tomothy\",\n            \"lastName\": \"Hawkins\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/48.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a28\",\n            \"title\": \"miss\",\n            \"firstName\": \"OcÃ©ane\",\n            \"lastName\": \"Denis\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/women/51.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a29\",\n            \"title\": \"ms\",\n            \"firstName\": \"Vanessa\",\n            \"lastName\": \"Ramos\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/women/33.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a2a\",\n            \"title\": \"mrs\",\n            \"firstName\": \"Susie\",\n            \"lastName\": \"Harrison\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/women/20.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a2b\",\n            \"title\": \"mrs\",\n            \"firstName\": \"Angelica\",\n            \"lastName\": \"Roussel\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/women/53.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a2c\",\n            \"title\": \"mr\",\n            \"firstName\": \"Toralf\",\n            \"lastName\": \"Streicher\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/men/80.jpg\"\n        },\n        {\n            \"id\": \"60d0fe4f5311236168a10a2d\",\n            \"title\": \"mrs\",\n            \"firstName\": \"Emilie\",\n            \"lastName\": \"Lambert\",\n            \"picture\": \"https://randomuser.me/api/portraits/med/women/93.jpg\"\n        }\n    ],\n    \"total\": 99,\n    \"page\": 1,\n    \"limit\": 50\n}"
+						}
+					]
+				},
+				{
+					"name": "create user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"email\",jsonData.email);\r",
+									"pm.environment.set(\"userId\",jsonData.id);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"email\": \"{{$randomEmail}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{userId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n   \"phone\": \"{{$randomPhoneNumber}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/{{userId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/{{userId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{userId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post Data",
+			"item": [
+				{
+					"name": "create post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"postId\",jsonData.id);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Cache-Control is present\", function () {\r",
+									"    pm.response.to.have.header(\"Cache-Control\");\r",
+									"});\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"tags\",jsonData.tags);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"id\": \"{{random id}}\",\r\n\"text\": \"{{$randomWord}}\",\r\n\"image\": \"https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Fanimal%2F&psig=AOvVaw28OKrptkKiBEPOvOtVAPOQ&ust=1676299338809000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCJiujOebkP0CFQAAAAAdAAAAABAE\",\r\n\"likes\": 1234,\r\n\"tags\": \"{{$randomWord}}\",\r\n\"owner\": \"{{userId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/post/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"post",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get post by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/User/{{userId}}/post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"User",
+								"{{userId}}",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get list post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get list by tag",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/tag/:id/post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tag",
+								":id",
+								"post"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{tags}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"pm.test(\"Succesful update, code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"QA\",\r\n    \"likes\": \"999\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/post/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"post",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{postId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"The post deleted, 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/post/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"post",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{postId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comment Data",
+			"item": [
+				{
+					"name": "create comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"commentId\",jsonData.id);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"message\": \"first comment\",\r\n\"owner\": \"{{userId}}\",\r\n\"post\": \"{{postId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/comment/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"comment",
+								"create"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 ok",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"message\": \"first comment\",\r\n\"owner\": \"63e8f775afe0a14bca89a35b\",\r\n\"post\": \"63e8fb92afe0a1261289a5cd\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/comment/create",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"comment",
+										"create"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "218"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"da-ywKIOFZ1JAt4hPSmdES8rzZ7pzo\""
+								},
+								{
+									"key": "Server",
+									"value": "Google Frontend"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31556926"
+								},
+								{
+									"key": "X-Cloud-Trace-Context",
+									"value": "a1a6a2906754cb907f6bd26b31e3b57d;o=1"
+								},
+								{
+									"key": "X-Country-Code",
+									"value": "RU"
+								},
+								{
+									"key": "Accept-Ranges",
+									"value": "bytes"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 12 Feb 2023 14:54:19 GMT"
+								},
+								{
+									"key": "X-Served-By",
+									"value": "cache-fra-eddf8230113-FRA"
+								},
+								{
+									"key": "X-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Cache-Hits",
+									"value": "0"
+								},
+								{
+									"key": "X-Timer",
+									"value": "S1676213659.983501,VS0,VE181"
+								},
+								{
+									"key": "Vary",
+									"value": "cookie,need-authorization, x-fh-requested-host, accept-encoding"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\";ma=86400,h3-29=\":443\";ma=86400,h3-27=\":443\";ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"63e8fd9bafe0a1402c89a72e\",\n    \"message\": \"first comment\",\n    \"owner\": {\n        \"id\": \"63e8f775afe0a14bca89a35b\",\n        \"firstName\": \"Josh\",\n        \"lastName\": \"Lastnamed\"\n    },\n    \"post\": \"63e8fb92afe0a1261289a5cd\",\n    \"publishDate\": \"2023-02-12T14:54:19.096Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "get list by user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/User/{{userId}}/comment",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"User",
+								"{{userId}}",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/comment/{{commentId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"comment",
+								"{{commentId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check comment by user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/{{userId}}/comment",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"{{userId}}",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tag data",
+			"item": [
+				{
+					"name": "get list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/tag",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tag"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mock requests",
+			"item": [
+				{
+					"name": "get list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://3ce5b32c-1baa-418f-aff8-5db42b451ded.mock.pstmn.io/user",
+							"protocol": "https",
+							"host": [
+								"3ce5b32c-1baa-418f-aff8-5db42b451ded",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "https://3ce5b32c-1baa-418f-aff8-5db42b451ded.mock.pstmn.io/user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://3ce5b32c-1baa-418f-aff8-5db42b451ded.mock.pstmn.io/user",
+									"protocol": "https",
+									"host": [
+										"3ce5b32c-1baa-418f-aff8-5db42b451ded",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"test\"\n}"
+						}
+					]
+				},
+				{
+					"name": "create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"email\": \"{{$randomEmail}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://3ce5b32c-1baa-418f-aff8-5db42b451ded.mock.pstmn.io/user/create",
+							"protocol": "https",
+							"host": [
+								"3ce5b32c-1baa-418f-aff8-5db42b451ded",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "https://3ce5b32c-1baa-418f-aff8-5db42b451ded.mock.pstmn.io/user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"email\": \"{{$randomEmail}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://3ce5b32c-1baa-418f-aff8-5db42b451ded.mock.pstmn.io/user",
+									"protocol": "https",
+									"host": [
+										"3ce5b32c-1baa-418f-aff8-5db42b451ded",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"firstName\": \"test1\",\n    \"lastName\": \"{{$randomLastName}}\",\n    \"email\": \"{{$randomEmail}}\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "63e8f0bd5de8ecbd05f4a945",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "app-id",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
