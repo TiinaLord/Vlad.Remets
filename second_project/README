@@ -1,0 +1,8 @@
+This project was created for the site dns-shop.ru as the first independent project, based on the knowledge gained in the course
+As part of the project, an autotest was written that runs the path from going to the site to placing an order for a specific MacBook
+In the future, it is planned to add new tests to the current
+
+Данный проект был создан для сайта dns-shop.ru в качестве первого самостоятельного проекта, на основе знаний, полученных на курсе
+В рамках проекта написан автотест, который прогоняет путь от перехода на сайт до оформления заказа конкретного макбука
+В дальнейшем планируется добавление новых тестов к текущему
+
